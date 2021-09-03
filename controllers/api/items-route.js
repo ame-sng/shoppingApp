@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const auth = require("../../middleware/authToken");
 
 //Item Model
 const Item = require("../../models/item")
@@ -17,9 +18,9 @@ router.get("/", (req, res) => {
 
 //* @route POST api/items
 //* @desc Create A Post
-//* @access Public
+//* @access Private
 
-router.post("/", (req, res)=>{
+router.post("/", auth, (req, res)=>{
   Item.create(req.body, (err, createdPost) => {
     if(err){
       res.status(400).json({error: err.message});
@@ -41,8 +42,8 @@ router.post("/", (req, res)=>{
 
 //* @route DELETE api/items/:id
 //* @desc Delete A Post
-//* @access Public
-router.delete("/:id", (req, res)=> {
+//* @access Private
+router.delete("/:id", auth, (req, res)=> {
   Item.findByIdAndRemove(req.params.id, (err, deletedItem) => {
     if (err) {
       res.status(400).json({ error: err.message });

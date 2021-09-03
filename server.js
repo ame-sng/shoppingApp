@@ -36,6 +36,12 @@ mongoose.connect(MONGODB_URI,
 const items = require("./controllers/api/items-route")
 app.use("/api/items", items)
 
+const users = require("./controllers/api/users-route")
+app.use("/api/users", users)
+
+const auth = require("./controllers/api/auth")
+app.use("/api/auth", auth)
+
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build", "index.html"));
 });
