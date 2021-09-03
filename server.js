@@ -3,6 +3,7 @@
 // =======================================
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const app = express();
 
@@ -10,6 +11,8 @@ const app = express();
 //         BODY PARSER/MIDDLEWARE
 // =======================================
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "./client/build")));
+
 
 // =======================================
 //              CONFIGURATIONS
@@ -32,6 +35,10 @@ mongoose.connect(MONGODB_URI,
 // =======================================
 const items = require("./controllers/api/items-route")
 app.use("/api/items", items)
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+});
 
 // =======================================
 //              LISTENER
