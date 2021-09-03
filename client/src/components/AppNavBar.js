@@ -20,7 +20,7 @@ const AppNavBar = () => {
           <NavbarBrand href="/">Shopping List</NavbarBrand>
           <NavbarToggler onClick={toggle}/>
           <Collapse isOpen={isOpen} navbar>
-            <Nav classNAme="ml-auto" navbar>
+            <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink href="https://github.com/ame-sng">
                   Github
